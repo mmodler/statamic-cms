@@ -488,7 +488,7 @@ defineExpose({
                                     :estimate-size="40"
                                     :text-content="(opt) => getOptionLabel(opt)"
                                 >
-                                    <div class="py-1 w-full overflow-x-hidden">
+                                    <div class="py-1 w-full overflow-x-hidden [&_button]:w-[calc(100%-2px)] [&_button]:ml-[1px]">
                                         <ComboboxItem
                                             :key="virtualItem.index + JSON.stringify(modelValue)"
                                             :value="getOptionValue(option)"
