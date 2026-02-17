@@ -4,6 +4,7 @@
             :model-value="active"
             :options="sites"
             :searchable="false"
+            :trigger-tabindex="0"
             @update:model-value="selected"
             option-label="name"
             option-value="handle"

@@ -59,6 +59,8 @@ const props = defineProps({
 	size: { type: String, default: 'base' },
 	/** When `true`, additional options can be added by typing in the search input and pressing enter. */
 	taggable: { type: Boolean, default: false },
+	/** Override the trigger's tabindex (e.g. 0 to make it focusable in tab order for non-searchable comboboxes). */
+	triggerTabindex: { type: [String, Number], default: undefined },
 	/** Controls the appearance of the select. <br><br> Options: `default`, `filled`, `ghost`, `subtle` */
 	variant: { type: String, default: 'default' },
 });
@@ -182,6 +184,17 @@ const limitIndicatorColor = computed(() => {
 });
 
 const triggerRef = useTemplateRef('trigger');
+
+watch(
+	() => [triggerRef.value, props.triggerTabindex],
+	async () => {
+		if (props.triggerTabindex == null) return;
+		await nextTick();
+		const el = triggerRef.value?.$el;
+		if (el) el.setAttribute('tabindex', String(props.triggerTabindex));
+	},
+	{ immediate: true },
+);
 const viewportRef = useTemplateRef('viewport');
 const scrollbarRef = useTemplateRef('scrollbar');
 const searchQuery = ref('');
